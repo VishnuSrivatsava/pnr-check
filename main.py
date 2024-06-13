@@ -5,7 +5,7 @@ import json
 
 # Assuming this function is part of your larger application
 def get_pnr_status(pnr):
-    url = f"https://api.example.com/pnr_status/{pnr}"
+    url = f"https://www.confirmtkt.com/pnr-status/{pnr}"
     response = requests.get(url)
     if response.status_code == 200:
         html_content = response.text
