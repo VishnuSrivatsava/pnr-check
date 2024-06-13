@@ -12,12 +12,12 @@
             flex-wrap: wrap;
         }
         .pnr-details {
-            flex: 0 0 48%; /* Adjusts the base width of the card to fit 2 in a row */
-            margin-bottom: 20px; /* Adds some space below each card */
+            flex: 0 0 48%;
+            margin-bottom: 20px;
         }
         @media (max-width: 768px) {
             .pnr-details {
-                flex: 0 0 100%; /* Stacks the cards on smaller screens */
+                flex: 0 0 100%;
             }
         }
     </style>
@@ -26,18 +26,16 @@
 <div class="container mt-5">
     <h1 class="text-center mb-4">Train Booking Details</h1>
     <div class="pnr-container">
-        {% for data in data_list %}
+        <% dataList.forEach(data => { %>
         <div class="pnr-details">
             <div class="card">
                 <div class="card-body">
-                    <h5 class="card-title">{{ data.get('TrainNo') }} - {{ data.get('TrainName') }}</h5>
-                    <p class="card-text">Date of Journey: {{ data.get('Doj') }}</p>
-                    <p class="card-text">From: {{ data.get('From') }} to {{ data.get('To') }}</p>
-                    <p class="card-text">Class: {{ data.get('Class') }}</p>
-                    <!-- Add more details as needed -->
+                    <h5 class="card-title"><%= data.TrainNo %> - <%= data.TrainName %></h5>
+                    <p class="card-text">Date of Journey: <%= data.Doj %></p>
+                    <p class="card-text">From: <%= data.From %> to <%= data.To %></p>
+                    <p class="card-text">Class: <%= data.Class %></p>
                 </div>
             </div>
-            <!-- Passenger Status -->
             <div class="mt-4">
                 <h3>Passenger Status</h3>
                 <table class="table">
@@ -46,23 +44,23 @@
                             <th scope="col">#</th>
                             <th scope="col">Booking Status</th>
                             <th scope="col">Current Status</th>
-                            <th scope="col">Coach Position</th> <!-- Updated from Berth No to Coach Position -->
+                            <th scope="col">Coach Position</th>
                         </tr>
                     </thead>
                     <tbody>
-                        {% for passenger in data.get('PassengerStatus', []) %}
+                        <% data.PassengerStatus.forEach(passenger => { %>
                         <tr>
-                            <th scope="row">{{ passenger.get('Number') }}</th>
-                            <td>{{ passenger.get('BookingStatus') }}</td>
-                            <td>{{ passenger.get('CurrentStatus') }}</td>
-                            <td>{{ passenger.get('CoachPosition') }}</td> <!-- Updated to display Coach Position -->
+                            <th scope="row"><%= passenger.Number %></th>
+                            <td><%= passenger.BookingStatus %></td>
+                            <td><%= passenger.CurrentStatus %></td>
+                            <td><%= passenger.CoachPosition %></td>
                         </tr>
-                        {% endfor %}
+                        <% }); %>
                     </tbody>
                 </table>
             </div>
         </div>
-        {% endfor %}
+        <% }); %>
     </div>
 </div>
 <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
